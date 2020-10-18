@@ -4,7 +4,8 @@
 ## This is the function of the Cache matrix
 
 makeCacheMatrix <- function(x = matrix()) {
-
+  y <- NULL
+  Cache <<-list(MatNormal = x, MatInv = y)
 }
 
 
@@ -12,4 +13,11 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
+    if (identical(x, Cache$MatNormal)){
+      print("returning from Cache")
+      return(Cache$MatInv)
+    }
+  
+  Cache <<- list(MatNormal = x, MatInv = solve(x))
+  Cache$MatInv
 }
